@@ -1,0 +1,21 @@
+launguage: bash
+sudo: false
+before_script:
+    - git config --global user.email "malecki.maciej@gmail.com"
+    - git config --global user.name "Maciej Malecki"
+    - git remote rm origin
+    - git remote add origin https://maciejmalecki:${GH_TOKEN}@github.com/c64lib/asm-ka.git
+script:
+	- ./check.sh
+deploy:
+	provider: releases
+	file: KickAss.jar
+	skip_cleanup: true
+	on:
+        repo: c64lib/asm-ka
+		tags: true
+        branch: release
+    api-key: ${GH_TOKEN}
+env:
+        global:
+                secure: E3JJuO8NOvVz5tHYCTe3MakxwsJITgaqa/XmnM9HHB/s9Us4rzo9W6NS7X3GDL9nYyzjiYvAfMPuFYIJOX0BIxO6q+x++3pHHDKcYbnmTveTY6EC4e6c9sm1GJDPS6PR/INdCwVAFP+8B/S+h0GbkUjz1UCSmH06q81vD+i5fJQb4/9Q/M6qTvH35E/IXo7K03EKhdzHq0MvOr8BFfOOPxoSda/0JRLp3+gShqoPYG7vhzpeDpL9YJFM1ECFAwP56w+CeDf6EeeLZBTKNakEKB7OPgyognlubRLHPdhZIQ3qfg18HXzVUywhchqY7L8Yg4HquoFJvD5aRw5Acr5dVHr0bxGE9GjryJUc7fIxbhP3LP1yo9W5qZYLt6pmlBKyQsao9GbT24+5KUqCr8TH7c844gE+CyM8Ho5pKSN9TmShQwJ6gQasyJgetyduQ5PJ+Dc7sxerF3cS/CohasrSm4+X8FHpHs9zMwByS1ggWDZTh1CkbWiT75cL7Y0JuyaVbVNEQXXuskok/RZA2Nlo5i/DAp5iV4Grune4UxXNmHTYHJoRgwVrZazhUnAJjN6d5zF4TArFp7+J2S3lDCYWhhbfyrk+cp5/xjb5f2L9CSOLgCaKPQyeIb0Sge8XKDTkFfIYqGP1kCqxO9NeOtUHa9MDWUCymWmQFtHWTngN0dM=
