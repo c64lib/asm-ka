@@ -12,11 +12,11 @@ echo "Found version ${VERSION}"
 HTTP_CODE=`curl -s -o /dev/null -I -w "%{http_code}" https://github.com/c64lib/asm-ka/releases/tag/${VERSION}`
 echo "Version ${VERSION} released?: ${HTTP_CODE}"
 
+wget --quiet http://theweb.dk/KickAssembler/KickAssembler.zip
+unzip KickAssembler.zip
+
 if [ $HTTP_CODE != '200' ]
 then
-	wget --quiet http://theweb.dk/KickAssembler/KickAssembler.zip
-	unzip KickAssembler.zip
-
 	git tag $VERSION
 	git push origin $VERSION
 fi
