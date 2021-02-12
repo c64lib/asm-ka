@@ -24,6 +24,7 @@ jobs:
         docker:
             - image: cibuilds/github:0.10
         steps:
+            - checkout
             - attach_workspace:
                 at: ./artifacts
             - run: mkdir out
@@ -43,7 +44,7 @@ workflows:
     check-new-release:
         triggers:
             - schedule:
-                cron: "0,15,30,45 * * * *"
+                cron: "0 22 * * *"
                 filters:
                     branches:
                         only:
@@ -52,14 +53,6 @@ workflows:
             - check
     publish-new-release:
         jobs:
-            - check:
-                filters:
-                    branches:
-                        ignore:
-                            - master
-                    tags:
-                        only:
-                            - /^([0-9]+)\.([0-9]+)$/
             - publish:
                 filters:
                     branches:
@@ -68,5 +61,3 @@ workflows:
                     tags:
                         only:
                             - /^([0-9]+)\.([0-9]+)$/
-                requires: 
-                    - check
