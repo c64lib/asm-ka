@@ -39,7 +39,7 @@ workflows:
     checkpublish:
         triggers:
             - schedule:
-                cron: "1 12 * * *"
+                cron: "32 11 * * *"
                 filters:
                     branches:
                         only:
