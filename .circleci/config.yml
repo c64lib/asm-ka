@@ -42,7 +42,7 @@ workflows:
     checkpublish:
         triggers:
             - schedule:
-                cron: "*/5 * * * *"
+                cron: "0,15,30,45 * * * *"
                 filters:
                     branches:
                         only:
