@@ -23,3 +23,9 @@ then
 	wget --quiet http://theweb.dk/KickAssembler/KickAssembler.zip
 	unzip KickAssembler.zip
 fi
+
+if [ "$CIRCLE_TAG" != "" ]
+then
+	wget --quiet http://theweb.dk/KickAssembler/KickAssembler.zip
+	unzip KickAssembler.zip
+fi
