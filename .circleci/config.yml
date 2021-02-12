@@ -39,7 +39,7 @@ workflows:
     checkpublish:
         triggers:
             - schedule:
-                cron: "28 11 * * *"
+                cron: "1 12 * * *"
                 filters:
                     branches:
                         only:
@@ -50,9 +50,6 @@ workflows:
                     branches:
                         only:
                             - master
-                    tags:
-                        only:
-                            - /^([0-9]+)\.([0-9]+)$/
             - publish:
                 filters:
                     branches:
