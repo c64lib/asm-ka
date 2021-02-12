@@ -47,12 +47,12 @@ workflows:
         jobs:
             - check
     publish:
-        filters:
-            branches:
-                ignore:
-                    - master
-            tags:
-                only:
-                    - /^([0-9]+)\.([0-9]+)$/
         jobs:
-            - publish
+            - publish:
+                filters:
+                    branches:
+                        ignore:
+                            - master
+                    tags:
+                        only:
+                            - /^([0-9]+)\.([0-9]+)$/
