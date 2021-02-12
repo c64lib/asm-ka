@@ -40,6 +40,10 @@ workflows:
         triggers:
             - schedule:
                 cron: "28 11 * * *"
+                filters:
+                    branches:
+                        only:
+                            - master
         jobs:
             - check:
                 filters:
