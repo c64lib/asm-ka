@@ -36,10 +36,13 @@ jobs:
 
 workflows:
     version: 2
+    commit:
+        jobs:
+            - check
     checkpublish:
         triggers:
             - schedule:
-                cron: "38 11 * * *"
+                cron: "*/5 * * * *"
                 filters:
                     branches:
                         only:
