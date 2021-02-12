@@ -45,11 +45,7 @@ workflows:
                         only:
                             - master
         jobs:
-            - check:
-                filters:
-                    branches:
-                        only:
-                            - master
+            - check
             # - publish:
                 # filters:
                     # branches:
