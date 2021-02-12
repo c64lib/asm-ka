@@ -1,0 +1,58 @@
+# Java Gradle CircleCI 2.0 configuration file
+version: 2
+jobs:
+    check:
+        machine:
+            image: ubuntu-2004:202010-01
+
+        working_directory: ~/repo
+
+        environment:
+            TERM: dumb
+
+        steps:
+            - checkout
+            - attach_workspace:
+                at: ./artifacts
+            - run: mkdir out
+            - run: ./check.sh
+            - run: cp KickAss.jar ../out
+            - persist-to-workspace:
+                root: .
+                paths:
+                    - out
+
+        publish:
+            docker:
+                - image: cibuilds/github:0.10
+            steps:
+                - attach_workspace:
+                    at: ./artifacts
+                - run:
+                    name: "Publish KickAss files on GitHub (asm_ka)"
+                    command: |
+                        ls ./artifacts/out
+                        ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/out
+
+workflows:
+    version: 2
+    check:
+        triggers:
+            - schedule:
+                cron: "0 0 * * *"
+                filters:
+                    branches:
+                        only:
+                            - master
+        jobs:
+            - check
+    publish:
+        filters:
+            branches:
+                ignore:
+                    - master
+            tags:
+                only:
+                    - /^([0-9]+)\.([0-9]+)$/
+        jobs
+            - publish
