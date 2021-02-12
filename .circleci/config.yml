@@ -36,18 +36,19 @@ jobs:
 
 workflows:
     version: 2
-    check:
+    checkpublish:
         triggers:
             - schedule:
-                cron: "58 10 * * *"
+                cron: "28 11 * * *"
+        jobs:
+            - check:
                 filters:
                     branches:
                         only:
                             - master
-        jobs:
-            - check
-    publish:
-        jobs:
+                    tags:
+                        only:
+                            - /^([0-9]+)\.([0-9]+)$/
             - publish:
                 filters:
                     branches:
@@ -56,3 +57,5 @@ workflows:
                     tags:
                         only:
                             - /^([0-9]+)\.([0-9]+)$/
+                requires: 
+                    - check
