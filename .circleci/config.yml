@@ -12,8 +12,6 @@ jobs:
 
         steps:
             - checkout
-            - attach_workspace:
-                at: ./artifacts
             - run: git config --global user.email "malecki.maciej@gmail.com"
             - run: git config --global user.name "Maciej Malecki"
             - run: git remote rm origin
@@ -25,16 +23,14 @@ jobs:
             - image: cibuilds/github:0.10
         steps:
             - checkout
-            - attach_workspace:
-                at: ./artifacts
             - run: mkdir out
             - run: ./download.sh
             - run: cp KickAss.jar out
             - run:
                 name: "Publish KickAss files on GitHub (asm_ka)"
                 command: |
-                    ls ./artifacts/out
-                    ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/out
+                    ls ./out
+                    ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./out
 
 workflows:
     version: 2
