@@ -3,7 +3,7 @@
 rm _FrontPage.html
 rm version
 
-wget --quiet http://theweb.dk/KickAssembler/_FrontPage.html
+wget http://theweb.dk/KickAssembler/_FrontPage.html
 
 VERSION=`cat _FrontPage.html | grep -Po '(?<=Kick Assembler V)\d+.\d.'`
 echo "Found version ${VERSION}"
