@@ -3,7 +3,7 @@
 rm _FrontPage.html
 rm version
 
-wget http://theweb.dk/KickAssembler/_FrontPage.html
+wget -d --user-agent="Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0" http://theweb.dk/KickAssembler/_FrontPage.html
 
 VERSION=`cat _FrontPage.html | grep -Po '(?<=Kick Assembler V)\d+.\d.'`
 echo "Found version ${VERSION}"
